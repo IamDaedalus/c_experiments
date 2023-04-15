@@ -1,4 +1,5 @@
 #include "queue.h"
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -114,6 +115,10 @@ void dequeue(queue_t** head)
 	}
 }
 
+/**
+ * enqueue - adds the bottom of the queue aka the last element
+ * @head: the queue to operate on
+ */
 void enqueue(queue_t** head, int val, char* str)
 {
 	queue_t* new;
@@ -138,6 +143,40 @@ void enqueue(queue_t** head, int val, char* str)
 	}
 }
 
+queue_t join_queue_many(queue_t** head, ...)
+{
+}
+
+/**
+ * join_queue - joins two queues together
+ * 		(for one that joins many together refer to join_queue_many)
+ * @head: the queue that will receive the incoming queue
+ * @incoming: the incoming queue
+ * Return: returns the head of the queue_t
+ */
+queue_t* join_queue(queue_t** head, queue_t** incoming)
+{
+	queue_t* current;
+
+	if (!*head && !*incoming)
+		return (NULL);
+	else {
+		current = *head;
+
+		while (current->next) {
+			current = current->next;
+		}
+		current->next = *incoming;
+	}
+
+	/* this is not adviced apparently */
+	return (*head);
+}
+
+/**
+ * free_elem - frees the queue from memory
+ * @head: the head of the queue
+ */
 void free_elem(queue_t* head)
 {
 	if (head) {

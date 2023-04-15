@@ -1,4 +1,5 @@
 #include "queue.h"
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -140,6 +141,31 @@ void enqueue(queue_t** head, int val, char* str)
 		}
 		current->next = new;
 	}
+}
+
+/**
+ * join_queue - joins two queues together
+ * @head: the queue that will receive the incoming queue
+ * @incoming: the incoming queue
+ * Return: returns the head of the queue_t
+ */
+queue_t* join_queue(queue_t** head, queue_t** incoming)
+{
+	queue_t* current;
+
+	if (!*head && !*incoming)
+		return (NULL);
+	else {
+		current = *head;
+
+		while (current->next) {
+			current = current->next;
+		}
+		current->next = *incoming;
+	}
+
+	/* this is not adviced apparently */
+	return (*head);
 }
 
 /**

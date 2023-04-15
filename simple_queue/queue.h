@@ -1,5 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
+
+#include <stdarg.h>
 #include <stdlib.h>
 
 typedef struct queue {
@@ -11,6 +13,7 @@ typedef struct queue {
 queue_t* init(int, char*);
 queue_t* peek(queue_t**);
 queue_t* get_elem_at_index(queue_t**, int);
+queue_t* join_queue(queue_t**, queue_t**);
 void dequeue(queue_t**);
 void enqueue(queue_t**, int num, char*);
 void free_elem(queue_t*);
